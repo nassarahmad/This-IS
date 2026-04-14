@@ -1,1 +1,33 @@
 <!-- admin -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin</title>
+</head>
+<body>
+
+<div id="navbar"></div>
+<div id="sidebar"></div>
+
+<h2>Admin Panel</h2>
+<div id="users"></div>
+
+<script>
+fetch('components/navbar.html').then(r=>r.text()).then(d=>navbar.innerHTML=d);
+fetch('components/sidebar.html').then(r=>r.text()).then(d=>sidebar.innerHTML=d);
+
+async function loadUsers(){
+  const res = await fetch('http://localhost:3000/api/users', {
+    headers:{ Authorization:'Bearer ' + localStorage.getItem('token')}
+  });
+  const users = await res.json();
+
+  document.getElementById('users').innerHTML =
+    users.map(u=>`<div>${u.email}</div>`).join('');
+}
+
+loadUsers();
+</script>
+
+</body>
+</html>

@@ -1,1 +1,22 @@
 <!-- navbar -->
+<nav class="navbar">
+  <h2>App</h2>
+  <button onclick="logout()">Logout</button>
+</nav>
+
+<style>
+.navbar {
+  display:flex;
+  justify-content:space-between;
+  background:#333;
+  color:#fff;
+  padding:10px;
+}
+</style>
+
+<script>
+function logout(){
+  localStorage.removeItem('token');
+  window.location.href = 'index.html';
+}
+</script>

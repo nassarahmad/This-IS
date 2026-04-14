@@ -1,1 +1,33 @@
 <!-- modal -->
+<div id="modal" class="modal hidden">
+  <div class="modal-content">
+    <span onclick="closeModal()" class="close">&times;</span>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<style>
+.modal {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.6);
+}
+.modal-content {
+  background:white;
+  margin:10% auto;
+  padding:20px;
+  width:50%;
+}
+.hidden { display:none; }
+</style>
+
+<script>
+function openModal(content){
+  document.getElementById('modal-body').innerHTML = content;
+  document.getElementById('modal').classList.remove('hidden');
+}
+function closeModal(){
+  document.getElementById('modal').classList.add('hidden');
+}
+</script>

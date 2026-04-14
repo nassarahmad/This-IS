@@ -3,3 +3,52 @@
 
 <input id="msg" placeholder="type..." />
 <button onclick="sendMessage('room1')">Send</button>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat</title>
+</head>
+<body>
+
+<h2>Chat</h2>
+
+<input id="msg" placeholder="Type message"/>
+<button onclick="send()">Send</button>
+
+<div id="messages"></div>
+
+<script>
+const API = 'http://localhost:3000/api/chat';
+
+async function send(){
+  const text = document.getElementById('msg').value;
+
+  await fetch(API, {
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      Authorization:'Bearer ' + localStorage.getItem('token')
+    },
+    body: JSON.stringify({ text })
+  });
+
+  load();
+}
+
+async function load(){
+  const res = await fetch(API, {
+    headers:{ Authorization:'Bearer ' + localStorage.getItem('token')}
+  });
+
+  const data = await res.json();
+
+  document.getElementById('messages').innerHTML =
+    data.map(m=>`<div>${m.text}</div>`).join('');
+}
+
+load();
+</script>
+
+</body>
+</html>
