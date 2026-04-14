@@ -10,6 +10,7 @@ const errorHandler = require("./middleware/errorHandler");
 
 app.use(errorHandler);
 
+
 app.use(cors({
   origin: "http://localhost:3000",
   credentials: true
@@ -21,5 +22,9 @@ app.use(cookieParser());
 // routes
 app.use("/api/v1/auth", require("./controllers/auth/auth.routes"));
 app.use("/api/v1/requests", require("./controllers/requests/requests.routes"));
+app.use('/api/auth', require('./controllers/auth/auth.routes'));
+app.use('/api/badges', require('./controllers/badges/badges.routes'));
+app.use('/api/map', require('./controllers/map/map.routes'));
+app.use('/api/ratings', require('./controllers/ratings/ratings.routes'));
 
 module.exports = app;

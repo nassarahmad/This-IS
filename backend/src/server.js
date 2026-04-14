@@ -4,6 +4,7 @@ const app = require("./app");
 const socket = require("./config/socket");
 
 const server = http.createServer(app);
+const app = require('./app');
 
 socket(server);
 
